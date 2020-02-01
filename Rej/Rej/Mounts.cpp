@@ -10,3 +10,7 @@ Mounts::Mounts()
 Mounts::~Mounts()
 {
 }
+
+void Mounts::moveMount()
+{
+}

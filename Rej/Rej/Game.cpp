@@ -1,12 +1,78 @@
 #include "Game.h"
 
+// Constructor
 
+GameState Game::m_gameMode{ GameState::Gameplay };
 
-Game::Game()
+Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 {
+	// Load Textures here
 }
 
+// Destructor
 
 Game::~Game()
 {
+}
+
+// Loop designed to work at equal speed on all PCs 
+// If a PC is slower, it will update the same amount of times
+// and render less often
+void Game::run()
+{
+	sf::Clock gameClock;
+	sf::Time timeTakenForUpdate = sf::Time::Zero;
+	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
+	while (m_renderWin.isOpen())
+	{
+		timeTakenForUpdate -= timePerFrame;
+		processInput();
+		update(timePerFrame);
+	}
+	render();
+}
+
+void Game::intialize()
+{
+}
+
+void Game::update(sf::Time t_deltaTime)
+{
+	m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y - 300 });
+}
+
+void Game::processInput()
+{
+	sf::Event event;
+	while (m_renderWin.pollEvent(event))
+	{
+		if (sf::Event::Closed == event.type)
+		{
+			m_renderWin.close();
+		}
+		if (sf::Event::KeyPressed == event.type)
+		{
+			if (sf::Keyboard::Escape == event.key.code)
+			{
+				m_renderWin.close();
+			}
+		}
+		if (event.type == sf::Event::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+			}
+		}
+		if (event.type == sf::Event::MouseButtonReleased)
+		{
+		}
+	}
+}
+
+void Game::render()
+{
+	m_renderWin.clear();
+	m_renderWin.setView(m_gameCamera);
+
+	m_renderWin.display();
 }
