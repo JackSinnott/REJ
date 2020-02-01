@@ -1,10 +1,2 @@
 ﻿  Game.cpp
-  NPC.cpp
-  Player.cpp
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Player.cpp(16,73): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-  Xbox360Controller.cpp
-  main.cpp
-  Generating Code...
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Player.cpp(16,47): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-  LINK : C:\Users\gamejamuser\Desktop\REJ\Rej\Debug\Rej.exe not found or not built by the last incremental link; performing full link
   Rej.vcxproj -> C:\Users\gamejamuser\Desktop\REJ\Rej\Debug\Rej.exe

@@ -28,8 +28,7 @@ private:
 
 	sf::IntRect m_playerFrame;
 
-	bool walkLeft{ false };
-	bool walkRight{ false };
+	bool spawned = true;
 
 	int animationTimer{ 0 };
 };

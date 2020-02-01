@@ -15,7 +15,7 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 	m_floorSprite.setOrigin(m_floorSprite.getGlobalBounds().width / 2, m_floorSprite.getGlobalBounds().height / 2);
 	m_floorSprite.setPosition(0, 750);
 	// initalize sf::view
-	//m_gameCamera.setSize(1200, 800);
+	m_gameCamera.setSize(1200, 800);
 }
 
 // Destructor
@@ -55,7 +55,7 @@ void Game::update(sf::Time t_deltaTime)
 {
 	m_gameController.update();
 	m_player.update(t_deltaTime, &m_gameController);
-	//m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y - 300 });
+	m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y - 110 });
 }
 
 void Game::processInput()
@@ -89,7 +89,7 @@ void Game::processInput()
 void Game::render()
 {
 	m_renderWin.clear(sf::Color::White);
-	//m_renderWin.setView(m_gameCamera);
+	m_renderWin.setView(m_gameCamera);
 	m_renderWin.draw(m_floorSprite);
 	m_player.render(m_renderWin);
 	m_renderWin.display();

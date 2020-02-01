@@ -22,7 +22,7 @@ protected:
 
 	sf::RenderWindow m_renderWin;
 	Xbox360Controller m_gameController;
-	//sf::View m_gameCamera;
+	sf::View m_gameCamera;
 
 	Player m_player;
 
