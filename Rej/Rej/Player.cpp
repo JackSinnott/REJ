@@ -77,17 +77,6 @@ void Player::updatePlayerFrame()
 	}
 	else
 	{
-		/*if (animationTimer == 0)
-		{
-			if (m_playerFrame.left == 89)
-			{
-				m_playerFrame.left = 0;
-			}
-			m_playerFrame.left = m_playerFrame.left + m_playerFrame.width;
-			m_playerFrame.top = 37;
-			animationTimer = 4;
-		}*/
-		
 	}
 	m_playerSprite.setTextureRect(m_playerFrame);
 	walkLeft = false;
@@ -132,7 +121,7 @@ void Player::checkInput(Xbox360Controller* t_cont)
 
 sf::Vector2f Player::getPosition()
 {
-	return m_playerSprite.getPosition();;
+	return m_playerSprite.getPosition();
 }
 
 void Player::setPosition(sf::Vector2f pos)
