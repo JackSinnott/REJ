@@ -5,6 +5,8 @@
 #include "Enum.h"
 #include "Player.h"
 #include "Xbox360Controller.h"
+#include "NPC.h"
+#include <vector>
 
 class Game
 {
@@ -25,9 +27,14 @@ protected:
 	//sf::View m_gameCamera;
 
 	Player m_player;
+	std::vector<NPC>(m_zombies);
 
 	sf::Sprite m_floorSprite;
 	sf::Texture m_floorTexture;
+	sf::Sprite m_grounds[4];
+
+	sf::Sprite m_skySprite;
+	sf::Texture m_skyTexture;
 	
 };
 

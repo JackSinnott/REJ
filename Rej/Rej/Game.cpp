@@ -14,6 +14,20 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 	m_floorSprite.setTexture(m_floorTexture);
 	m_floorSprite.setOrigin(m_floorSprite.getGlobalBounds().width / 2, m_floorSprite.getGlobalBounds().height / 2);
 	m_floorSprite.setPosition(0, 750);
+
+	for (int i = 0; i < 4; i++)
+	{
+		m_grounds[i].setTexture(m_floorTexture);
+		m_grounds[i].setOrigin(m_floorSprite.getGlobalBounds().width / 2, m_floorSprite.getGlobalBounds().height / 2);
+		m_grounds[i].setPosition(0 + i * 3070, 750);
+	}
+
+
+	m_skyTexture.loadFromFile("ASSETS/IMAGES/dubSky.png");
+	m_skySprite.setTexture(m_skyTexture);
+	m_skySprite.setOrigin(m_skySprite.getGlobalBounds().width / 2, m_skySprite.getGlobalBounds().height / 2);
+	m_skySprite.setPosition(m_floorSprite.getPosition().x, m_floorSprite.getPosition().y - (m_floorSprite.getGlobalBounds().height / 2 + m_skySprite.getGlobalBounds().height / 2) + 1);
+
 	// initalize sf::view
 	//m_gameCamera.setSize(1200, 800);
 }
@@ -89,8 +103,24 @@ void Game::processInput()
 void Game::render()
 {
 	m_renderWin.clear(sf::Color::White);
+<<<<<<< Updated upstream
 	//m_renderWin.setView(m_gameCamera);
 	m_renderWin.draw(m_floorSprite);
+=======
+	m_renderWin.setView(m_gameCamera);
+
+	for (int i = 0; i < 4; i++)
+	{
+		m_renderWin.draw(m_grounds[i]);
+	}
+	
+	for (int i = 0; i < 3; i++)
+	{
+		m_renderWin.draw(m_skySprite);
+		m_skySprite.setPosition(m_skySprite.getPosition().x + m_skySprite.getGlobalBounds().width, m_skySprite.getPosition().y);
+	}
+	m_skySprite.setPosition(m_floorSprite.getPosition().x, m_floorSprite.getPosition().y - (m_floorSprite.getGlobalBounds().height / 2 + m_skySprite.getGlobalBounds().height / 2) + 1); // Reset
+>>>>>>> Stashed changes
 	m_player.render(m_renderWin);
 	m_renderWin.display();
 }

@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 ﻿  Player.cpp
 C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Player.cpp(16,73): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Player.cpp(16,47): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+=======
+﻿  Game.cpp
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(22,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+>>>>>>> Stashed changes
   Rej.vcxproj -> C:\Users\gamejamuser\Desktop\REJ\Rej\Debug\Rej.exe
