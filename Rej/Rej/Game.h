@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Enum.h"
 #include "Player.h"
+#include "Xbox360Controller.h"
 
 class Game
 {
@@ -20,8 +21,13 @@ protected:
 	void render();
 
 	sf::RenderWindow m_renderWin;
-	sf::View m_gameCamera;
+	Xbox360Controller m_gameController;
+	//sf::View m_gameCamera;
 
 	Player m_player;
+
+	sf::Sprite m_floorSprite;
+	sf::Texture m_floorTexture;
+	
 };
 
