@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Enum.h"
+#include "Player.h"
 
 class Game
 {
@@ -21,6 +22,6 @@ protected:
 	sf::RenderWindow m_renderWin;
 	sf::View m_gameCamera;
 
-	
+	Player m_player;
 };
 

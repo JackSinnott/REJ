@@ -11,8 +11,6 @@ public:
 	void update(sf::Time dt);
 	void render(sf::RenderWindow & t_win);
 	void move(MyVector3 t_movement);
-	void jump();
-	void updatePlayerFrame();
 	sf::Sprite* getBody();
 	void checkInput();
 	sf::Vector2f getPosition();
@@ -20,10 +18,11 @@ public:
 	void pushBackToPrevious();
 
 private:
+	void updatePlayerFrame();
+
 	sf::Texture m_playerTexture;
 	sf::Sprite m_playerSprite;
 
-	sf::Vector2f m_gravity;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_position;
 	sf::Vector2f m_previousPos;
