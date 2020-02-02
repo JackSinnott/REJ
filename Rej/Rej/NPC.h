@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "SFML/Graphics.hpp"
@@ -20,9 +19,11 @@ public:
 	void setPosition(sf::Vector2f pos);
 	void pushBackToPrevious();
 	void setRandomPosition();
+	bool areWeMoving();
 
 private:
 	void updateNPCFrame();
+	
 	
 
 	sf::Texture m_NPCTexture;
@@ -35,7 +36,8 @@ private:
 
 	sf::IntRect m_playerFrame;
 
-	bool spawned = true;
+	bool moving = true;
+	bool getMoving = false;
 
 	int animationTimer{ 0 };
 };

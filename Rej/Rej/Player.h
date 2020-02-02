@@ -4,7 +4,6 @@
 #include "MyVector3.h"
 #include "Xbox360Controller.h"
 #include "NPC.h"
-#include "Enum.h"
 #include <queue>
 
 

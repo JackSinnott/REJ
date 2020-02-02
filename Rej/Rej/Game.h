@@ -38,7 +38,9 @@ protected:
 	sf::Sprite m_skySprite;
 	sf::Texture m_skyTexture;
 
-	GameState m_currentState;
+	int index = 0;
+
+	int timer = 0;
 
 	std::array<NPC, 10> m_soliders;
 	

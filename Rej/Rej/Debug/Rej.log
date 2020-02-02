@@ -1,8 +1,5 @@
 ﻿  Game.cpp
 C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(20,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(27,20): warning C4018:  '<': signed/unsigned mismatch
-  main.cpp
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(75,21): warning C4018:  '<': signed/unsigned mismatch
-  Generating Code...
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\main.cpp(23,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(74,20): warning C4018:  '<': signed/unsigned mismatch
   Rej.vcxproj -> C:\Users\gamejamuser\Desktop\REJ\Rej\Debug\Rej.exe

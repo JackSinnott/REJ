@@ -31,7 +31,7 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 	// initalize sf::view
 	m_gameCamera.setSize(1200, 800);
 
-	m_currentState = GameState::Gameplay;
+
 }
 
 // Destructor
@@ -69,15 +69,14 @@ void Game::intialize()
 
 void Game::update(sf::Time t_deltaTime)
 {
-	if (m_currentState == GameState::Gameplay)
+	
+	m_gameController.update();
+	for (int i = 0; i < m_soliders.size(); i++)
 	{
-		m_gameController.update();
-		for (int i = 0; i < m_soliders.size(); i++)
-		{
-			m_soliders[i].update(t_deltaTime);
-		}
-		m_player.update(t_deltaTime, &m_gameController);
+		m_soliders[i].update(t_deltaTime);
 	}
+	m_player.update(t_deltaTime, &m_gameController);
+	
 	checkButtonInput(&m_gameController);
 	m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y + 200 });
 }
@@ -140,24 +139,20 @@ void Game::render()
 
 void Game::checkButtonInput(Xbox360Controller * t_cont)
 {
-	if (t_cont->m_currentState.start == true && t_cont->m_previousState.start != true)
-	{
-		m_currentState = GameState::Pause;
-	}
+	
 
-	if (t_cont->m_currentState.a == true && t_cont->m_previousState.a != true)
+	if (t_cont->m_currentState.a == true && timer == 0)
 	{
-		if (m_currentState == GameState::Pause)
+		m_soliders[index].areWeMoving();
+		timer = 15;
+		if (index < 9)
 		{
-		
-		}
-
-	}
-	if (t_cont->m_currentState.b == true && t_cont->m_previousState.b != true)
-	{
-		if (m_currentState == GameState::Pause)
-		{
-			m_currentState = GameState::Gameplay;
+			index++;
 		}
 	}
+	if (timer > 0)
+	{
+		timer--;
+	}
+	
 }

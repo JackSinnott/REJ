@@ -13,6 +13,7 @@ NPC::NPC() : m_velocity(0.0f, 0.0f)
 	m_NPCSprite.setTextureRect(m_playerFrame);
 	m_NPCSprite.setOrigin(m_playerFrame.width / 2, m_playerFrame.height / 2);
 	m_NPCSprite.setScale(3.0f, 3.0f);
+	m_NPCSprite.setPosition(100.0f, 1500.0f);
 
 }
 
@@ -26,7 +27,10 @@ NPC::~NPC()
 void NPC::update(sf::Time dt)
 {
 	m_NPCSprite.setPosition(m_position);
-	move(MyVector3{ 5,0,0 });
+	if (getMoving)
+	{
+		move(MyVector3{ 5,0,0 });
+	}
 	updateNPCFrame();
 }
 
@@ -64,7 +68,7 @@ void NPC::pushBackToPrevious()
 void NPC::updateNPCFrame()
 {
 
-	if (spawned == true)
+	if (moving == true)
 	{
 		if (animationTimer == 0)
 		{
@@ -82,8 +86,17 @@ void NPC::updateNPCFrame()
 
 	}
 	m_NPCSprite.setTextureRect(m_playerFrame);
-	spawned = false;
+	moving = false;
 
+}
+
+bool NPC::areWeMoving()
+{
+	if (!getMoving)
+	{
+		getMoving = true;
+	}
+	return getMoving;
 }
 
 void NPC::setRandomPosition()
