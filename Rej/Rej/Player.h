@@ -28,10 +28,15 @@ private:
 	sf::Texture m_playerTexture;
 	sf::Sprite m_playerSprite;
 
+	sf::IntRect m_playerFrame;
+
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_position;
 	sf::Vector2f m_previousPos;
 	
+	bool firstLoop = true;
+	bool secondLoop = false;
+	bool thirdLoop = false;
 
 	float rotation;
 	bool walkLeft{ false };

@@ -132,6 +132,7 @@
     <ClInclude Include="Scenery.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Xbox360Controller.h" />
+    <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Scenery.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Xbox360Controller.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

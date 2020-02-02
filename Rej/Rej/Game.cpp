@@ -13,6 +13,26 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 	m_floorSprite.setOrigin(m_floorSprite.getGlobalBounds().width / 2, m_floorSprite.getGlobalBounds().height / 2);
 	m_floorSprite.setPosition(0, 750);
 
+	if (!m_carTexture.loadFromFile("ASSETS/IMAGES/sprite sheet.png"))
+	{
+		std::cout << "Why do you hate me so" << std::endl;
+	}
+	m_carSprite.setTexture(m_carTexture);
+	m_carFrame = sf::IntRect(25, 28, 209, 86);
+	m_carSprite.setTextureRect(m_carFrame);
+	m_carSprite.setPosition(-1900, 600);
+	m_carSprite.setScale(1.6f, 2.3f);
+	m_builderSprite.setScale(4.0f, 4.0f);
+
+	if (!m_builderTexture.loadFromFile("ASSETS/IMAGES/sprite sheet.png"))
+	{
+		std::cout << "AHHHHHHHHHHH" << std::endl;
+	}
+	m_builderSprite.setTexture(m_builderTexture);
+	m_builderFrame = sf::IntRect(813, 56, 20, 38);
+	m_builderSprite.setTextureRect(m_builderFrame);
+	m_builderSprite.setPosition(-1950, 600);
+
 	for (int i = 0; i < 4; i++)
 	{
 		m_grounds[i].setTexture(m_floorTexture);
@@ -27,6 +47,10 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 	for (int i = 0; i < m_soliders.size(); i++)
 	{
 		m_soliders[i].setRandomPosition();
+	}
+	for (int i = 0; i < m_zombie.size(); i++)
+	{
+		m_zombie[i].setRandomPosition();
 	}
 	// initalize sf::view
 	m_gameCamera.setSize(1200, 800);
@@ -75,10 +99,28 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_soliders[i].update(t_deltaTime);
 	}
+	for (int i = 0; i < m_zombie.size(); i++)
+	{
+		m_zombie[i].update(t_deltaTime);
+	}
+
 	m_player.update(t_deltaTime, &m_gameController);
 	
 	checkButtonInput(&m_gameController);
 	m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y + 200 });
+
+	if (animationTimer == 0)
+	{
+		if (m_builderFrame.left == 833)
+		{
+			m_builderFrame.left = 813;
+		}
+		m_builderFrame.left = m_builderFrame.left + m_builderFrame.width;
+		animationTimer = 18;
+	}
+	animationTimer--;
+
+	m_builderSprite.setTextureRect(m_builderFrame);
 }
 
 void Game::processInput()
@@ -133,6 +175,14 @@ void Game::render()
 	{
 		m_renderWin.draw(*npc.getBody());
 	}
+	for (auto& zom : m_zombie)
+	{
+		m_renderWin.draw(*zom.getBody());
+	}
+	
+	m_renderWin.draw(m_carSprite);
+	m_renderWin.draw(m_builderSprite);
+
 	m_player.render(m_renderWin);
 	m_renderWin.display();
 }

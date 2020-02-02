@@ -7,6 +7,7 @@
 #include "NPC.h"
 #include <vector>
 #include <array>
+#include "Zombie.h"
 
 
 
@@ -38,11 +39,23 @@ protected:
 	sf::Sprite m_skySprite;
 	sf::Texture m_skyTexture;
 
+	sf::Sprite m_carSprite;
+	sf::Texture m_carTexture;
+
+	sf::IntRect m_carFrame;
+
+	sf::Sprite m_builderSprite;
+	sf::Texture m_builderTexture;
+
+	sf::IntRect m_builderFrame;
+
 	int index = 0;
 
 	int timer = 0;
 
+	int animationTimer = 0;
 	std::array<NPC, 10> m_soliders;
+	std::array<Zombie, 20> m_zombie;
 	
 };
 

@@ -4,14 +4,14 @@
 NPC::NPC() : m_velocity(0.0f, 0.0f)
 
 {
-	if (!m_NPCTexture.loadFromFile("Assets/IMAGES/Solider_idle.png"))
+	if (!m_NPCTexture.loadFromFile("Assets/IMAGES/sprite sheet.png"))
 	{
 		std::cout << "Problems Heuston" << std::endl;
 	}
 	m_NPCSprite.setTexture(m_NPCTexture);
-	m_playerFrame = sf::IntRect(0, 0, 22, 32);
-	m_NPCSprite.setTextureRect(m_playerFrame);
-	m_NPCSprite.setOrigin(m_playerFrame.width / 2, m_playerFrame.height / 2);
+	m_NPCFrame = sf::IntRect(425, 15, 25, 32);
+	m_NPCSprite.setTextureRect(m_NPCFrame);
+	m_NPCSprite.setOrigin(m_NPCFrame.width / 2, m_NPCFrame.height / 2);
 	m_NPCSprite.setScale(3.0f, 3.0f);
 	m_NPCSprite.setPosition(100.0f, 1500.0f);
 
@@ -68,25 +68,18 @@ void NPC::pushBackToPrevious()
 void NPC::updateNPCFrame()
 {
 
-	if (moving == true)
+	if (animationTimer == 0)
 	{
-		if (animationTimer == 0)
+		if (m_NPCFrame.left == 425)
 		{
-			if (m_playerFrame.left == 0)
-			{
-				m_playerFrame.left = 66;
-			}
-			m_playerFrame.left = m_playerFrame.left - m_playerFrame.width;
-			animationTimer = 6;
+			m_NPCFrame.left = 500;
 		}
-		animationTimer--;
+		m_NPCFrame.left = m_NPCFrame.left - m_NPCFrame.width;
+		animationTimer = 18;
 	}
-	else
-	{
-
-	}
-	m_NPCSprite.setTextureRect(m_playerFrame);
-	moving = false;
+	animationTimer--;
+	
+	m_NPCSprite.setTextureRect(m_NPCFrame);
 
 }
 

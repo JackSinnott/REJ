@@ -7,14 +7,16 @@ Player::Player() : m_position{ 30.0f, 200.0f },
 				   m_velocity(0.0f, 0.0f),
 				   rotation(0.0f)
 {
-	if (!m_playerTexture.loadFromFile("Assets/IMAGES/mdh.png"))
+	if (!m_playerTexture.loadFromFile("Assets/IMAGES/sprite sheet.png"))
 	{
 		std::cout << "Problems Heuston" << std::endl;
 	}
 	m_playerSprite.setTexture(m_playerTexture);
+	m_playerFrame = sf::IntRect(295, 167, 130, 130);
+	m_playerSprite.setTextureRect(m_playerFrame);
 	m_playerSprite.setPosition(m_position);
-	m_playerSprite.setOrigin(m_playerTexture.getSize().x / 2, m_playerTexture.getSize().y / 2);
-	m_playerSprite.setScale(0.1f, 0.1f);
+	m_playerSprite.setOrigin(m_playerFrame.width / 2, m_playerFrame.height / 2);
+	m_playerSprite.setScale(1.0f, 1.0f);
 }
 
 
@@ -27,6 +29,7 @@ void Player::update(sf::Time dt, Xbox360Controller* t_cont)
 	m_playerSprite.setPosition(m_position);
 	checkInput(t_cont);
 	updatePlayerFrame();
+	m_playerSprite.setTextureRect(m_playerFrame);
 }
 
 void Player::render(sf::RenderWindow & t_win)
@@ -96,10 +99,76 @@ void Player::checkInput(Xbox360Controller* t_cont)
 	
 	if (t_cont->m_currentState.rTrigger > 50 && t_cont->m_previousState.rTrigger < 50)
 	{
+		m_playerFrame.left = m_playerFrame.left - m_playerFrame.width;
+
+		if (firstLoop == true && m_playerFrame.left <= 0)
+		{
+			firstLoop = false;
+			secondLoop = true;
+			m_playerFrame.left = 295;
+		}
+		if (secondLoop == true && m_playerFrame.left <= 0)
+		{
+			secondLoop = false;
+			thirdLoop = true;
+			m_playerFrame.left = 295;
+		}
+		if (thirdLoop == true && m_playerFrame.left <= 0)
+		{
+			firstLoop = true;
+			secondLoop = false;
+			m_playerFrame.left = 295;
+		}
+
+		if (firstLoop == true)
+		{
+			m_playerFrame.top = 167;
+		}
+		else if (secondLoop == true)
+		{
+			m_playerFrame.top = 308;
+		}
+		else if (thirdLoop == true)
+		{
+			m_playerFrame.top = 630;
+		}
 		
 	}
 	if (t_cont->m_currentState.lTrigger < -50 && t_cont->m_previousState.lTrigger > -50)
 	{
+		m_playerFrame.left = m_playerFrame.left + m_playerFrame.width;
+	
+		if (firstLoop == true && m_playerFrame.left >= 295)
+		{
+			firstLoop = false;
+			secondLoop = true;
+			m_playerFrame.left = 5;
+		}
+		if (secondLoop == true && m_playerFrame.left >= 295)
+		{
+			secondLoop = false;
+			thirdLoop = true;
+			m_playerFrame.left = 5;
+		}
+		if (thirdLoop == true && m_playerFrame.left >= 295)
+		{
+			firstLoop = true;
+			secondLoop = false;
+			m_playerFrame.left = 5;
+		}
+
+		if (firstLoop == true)
+		{
+			m_playerFrame.top = 167;
+		}
+		else if (secondLoop == true)
+		{
+			m_playerFrame.top = 308;
+		}
+		else if (thirdLoop == true)
+		{
+			m_playerFrame.top = 630;
+		}
 	}
 	t_cont->m_previousState = t_cont->m_currentState;
 }

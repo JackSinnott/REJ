@@ -1,5 +1,7 @@
 ﻿  Game.cpp
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(20,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(27,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(74,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(40,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(47,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(51,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(98,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gamejamuser\Desktop\REJ\Rej\Rej\Game.cpp(102,20): warning C4018:  '<': signed/unsigned mismatch
   Rej.vcxproj -> C:\Users\gamejamuser\Desktop\REJ\Rej\Debug\Rej.exe
