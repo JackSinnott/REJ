@@ -2,8 +2,6 @@
 
 // Constructor
 
-GameState Game::m_gameMode{ GameState::Gameplay };
-
 Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 {
 	// Load Textures here
@@ -22,14 +20,18 @@ Game::Game() : m_renderWin{ sf::VideoMode{1200,800,1}, "REF"}
 		m_grounds[i].setPosition(0 + i * 3070, 750);
 	}
 
-
 	m_skyTexture.loadFromFile("ASSETS/IMAGES/dubSky.png");
 	m_skySprite.setTexture(m_skyTexture);
 	m_skySprite.setOrigin(m_skySprite.getGlobalBounds().width / 2, m_skySprite.getGlobalBounds().height / 2);
 	m_skySprite.setPosition(m_floorSprite.getPosition().x, m_floorSprite.getPosition().y - (m_floorSprite.getGlobalBounds().height / 2 + m_skySprite.getGlobalBounds().height / 2) + 1);
-
+	for (int i = 0; i < m_soliders.size(); i++)
+	{
+		m_soliders[i].setRandomPosition();
+	}
 	// initalize sf::view
-	//m_gameCamera.setSize(1200, 800);
+	m_gameCamera.setSize(1200, 800);
+
+	m_currentState = GameState::Gameplay;
 }
 
 // Destructor
@@ -67,9 +69,17 @@ void Game::intialize()
 
 void Game::update(sf::Time t_deltaTime)
 {
-	m_gameController.update();
-	m_player.update(t_deltaTime, &m_gameController);
-	//m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y - 300 });
+	if (m_currentState == GameState::Gameplay)
+	{
+		m_gameController.update();
+		for (int i = 0; i < m_soliders.size(); i++)
+		{
+			m_soliders[i].update(t_deltaTime);
+		}
+		m_player.update(t_deltaTime, &m_gameController);
+	}
+	checkButtonInput(&m_gameController);
+	m_gameCamera.setCenter(sf::Vector2f{ m_player.getPosition().x, m_player.getPosition().y + 200 });
 }
 
 void Game::processInput()
@@ -103,10 +113,8 @@ void Game::processInput()
 void Game::render()
 {
 	m_renderWin.clear(sf::Color::White);
-<<<<<<< Updated upstream
-	//m_renderWin.setView(m_gameCamera);
 	m_renderWin.draw(m_floorSprite);
-=======
+
 	m_renderWin.setView(m_gameCamera);
 
 	for (int i = 0; i < 4; i++)
@@ -119,8 +127,37 @@ void Game::render()
 		m_renderWin.draw(m_skySprite);
 		m_skySprite.setPosition(m_skySprite.getPosition().x + m_skySprite.getGlobalBounds().width, m_skySprite.getPosition().y);
 	}
+	
 	m_skySprite.setPosition(m_floorSprite.getPosition().x, m_floorSprite.getPosition().y - (m_floorSprite.getGlobalBounds().height / 2 + m_skySprite.getGlobalBounds().height / 2) + 1); // Reset
->>>>>>> Stashed changes
+
+	for (auto& npc : m_soliders)
+	{
+		m_renderWin.draw(*npc.getBody());
+	}
 	m_player.render(m_renderWin);
 	m_renderWin.display();
+}
+
+void Game::checkButtonInput(Xbox360Controller * t_cont)
+{
+	if (t_cont->m_currentState.start == true && t_cont->m_previousState.start != true)
+	{
+		m_currentState = GameState::Pause;
+	}
+
+	if (t_cont->m_currentState.a == true && t_cont->m_previousState.a != true)
+	{
+		if (m_currentState == GameState::Pause)
+		{
+		
+		}
+
+	}
+	if (t_cont->m_currentState.b == true && t_cont->m_previousState.b != true)
+	{
+		if (m_currentState == GameState::Pause)
+		{
+			m_currentState = GameState::Gameplay;
+		}
+	}
 }

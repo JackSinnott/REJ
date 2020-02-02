@@ -3,6 +3,11 @@
 #include "SFML/Graphics.hpp"
 #include "MyVector3.h"
 #include "Xbox360Controller.h"
+#include "NPC.h"
+#include "Enum.h"
+#include <queue>
+
+
 
 class Player
 {
@@ -27,9 +32,9 @@ private:
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_position;
 	sf::Vector2f m_previousPos;
+	
 
-	sf::IntRect m_playerFrame;
-
+	float rotation;
 	bool walkLeft{ false };
 	bool walkRight{ false };
 

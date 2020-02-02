@@ -2,19 +2,19 @@
 
 
 
-Player::Player() : m_position{ 30.0f, 580.0f },
-				   m_velocity(0.0f, 0.0f)
+
+Player::Player() : m_position{ 30.0f, 200.0f },
+				   m_velocity(0.0f, 0.0f),
+				   rotation(0.0f)
 {
-	if (!m_playerTexture.loadFromFile("Assets/IMAGES/Solider_idle.png"))
+	if (!m_playerTexture.loadFromFile("Assets/IMAGES/mdh.png"))
 	{
 		std::cout << "Problems Heuston" << std::endl;
 	}
 	m_playerSprite.setTexture(m_playerTexture);
-	m_playerFrame = sf::IntRect(0, 0, 22, 32);
-	m_playerSprite.setTextureRect(m_playerFrame);
 	m_playerSprite.setPosition(m_position);
-	m_playerSprite.setOrigin(m_playerFrame.width / 2, m_playerFrame.height / 2);
-	m_playerSprite.setScale(3.0f, 3.0f);
+	m_playerSprite.setOrigin(m_playerTexture.getSize().x / 2, m_playerTexture.getSize().y / 2);
+	m_playerSprite.setScale(0.1f, 0.1f);
 }
 
 
@@ -44,52 +44,31 @@ void Player::updatePlayerFrame()
 {
 	if (walkRight == true)
 	{
-		//If the animation timer reached 0.
-		if (animationTimer == 0)
-		{
+		
+	m_playerSprite.rotate(10);
 			
-			//Jump to the next frame in line.
-			m_playerFrame.left = m_playerFrame.left + m_playerFrame.width;
-
-			//If we have reached the end of the sprite sheet we go back to the start.
-			if (m_playerFrame.left == 66)
-			{
-				m_playerFrame.left = 0;
-			}
-
-			//Reset the animation timer back to max.
-			animationTimer = 6;
-		}
-		animationTimer--;
 	}
 	else if (walkLeft == true)
 	{
-		if (animationTimer == 0)
-		{
-			if (m_playerFrame.left == 0)
-			{
-				m_playerFrame.left = 66;
-			}
-			m_playerFrame.left = m_playerFrame.left - m_playerFrame.width;
-			animationTimer = 6;
-		}
-		animationTimer--;
+		m_playerSprite.rotate(-10);
 	}
 	else
 	{
-		/*if (animationTimer == 0)
+		rotation = m_playerSprite.getRotation();
+		if (rotation == 0)
 		{
-			if (m_playerFrame.left == 89)
-			{
-				m_playerFrame.left = 0;
-			}
-			m_playerFrame.left = m_playerFrame.left + m_playerFrame.width;
-			m_playerFrame.top = 37;
-			animationTimer = 4;
-		}*/
-		
+
+		}
+		else if (rotation > 180)
+		{
+			m_playerSprite.rotate(10);
+		}
+		else if (rotation < 359)
+		{
+			m_playerSprite.rotate(-10);
+		}
 	}
-	m_playerSprite.setTextureRect(m_playerFrame);
+
 	walkLeft = false;
 	walkRight = false;
 }
@@ -114,12 +93,7 @@ void Player::checkInput(Xbox360Controller* t_cont)
 		walkLeft = true;
 
 	}
-
-	if (t_cont->m_currentState.a == true && t_cont->m_previousState.a != true)
-	{
-		
-		
-	}
+	
 	if (t_cont->m_currentState.rTrigger > 50 && t_cont->m_previousState.rTrigger < 50)
 	{
 		
